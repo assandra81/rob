@@ -27,13 +27,9 @@ const viewer = new Cesium.Viewer('cesiumContainer', {
 });
 
 // Tambahkan layer tsunami risk
-//viewer.imageryLayers.addImageryProvider(
-//  new Cesium.IonImageryProvider({ assetId: 4671328 })
-//);
-const layer = viewer.imageryLayers.addImageryProvider(
-  await Cesium.IonImageryProvider.fromAssetId(4671328),
+viewer.imageryLayers.addImageryProvider(
+  new Cesium.IonImageryProvider({ assetId: 4671328 })
 );
-
 
     
   </script>
