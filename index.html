@@ -18,6 +18,10 @@ viewer.imageryLayers.addImageryProvider(
   new Cesium.IonImageryProvider({ assetId: 2 }) // Bing Maps Aerial
 );
 
+    const layer = viewer.imageryLayers.addImageryProvider(
+  await Cesium.IonImageryProvider.fromAssetId(4671328),
+);
+
     
   </script>
 </body>
