@@ -2,28 +2,51 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Cesium Globe</title>
-  <script src="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Cesium.js"></script>
-  <link href="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+  <title>Tsunami Risk Semarang 3D</title>
+  <!-- Load CesiumJS -->
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.113/Build/Cesium/Cesium.js"></script>
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.113/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
   <style>
     html, body, #cesiumContainer {
       width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
+    }
+    #slider {
+      position: absolute;
+      top: 10px; left: 10px;
+      width: 200px;
     }
   </style>
 </head>
 <body>
   <div id="cesiumContainer"></div>
-  <script>
-    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMmI3Y2IyOC1mOGNlLTRiNDAtODAwMC1hZTRjMzhmZDkzYjUiLCJpZCI6NDI0MTgwLCJpYXQiOjE3NzcyODM5MzZ9.5hcQx2RjNgnk_KIY9JleSMNoyRe1H9BaPVU8FDQlnSs';
+  <input id="slider" type="range" min="0" max="1" step="0.05" value="1">
 
+  <script>
+    // Buat viewer dengan terrain dari Cesium Ion (gunakan Asset ID)
     const viewer = new Cesium.Viewer('cesiumContainer', {
-      terrainProvider: Cesium.createWorldTerrain(),
-      imageryProvider: new Cesium.IonImageryProvider({ assetId: 2 }),
-      baseLayerPicker: false
+      terrainProvider: Cesium.createWorldTerrain({
+        requestVertexNormals: true
+      }),
+      imageryProvider: new Cesium.IonImageryProvider({ assetId: 4671328 }) // Bing Maps
     });
 
-    viewer.scene.globe.enableLighting = true;
-    viewer.scene.globe.depthTestAgainstTerrain = true;
+    // Tambahkan GeoTIFF hasil export dari GEE
+    const riskLayer = viewer.imageryLayers.addImageryProvider(
+      new Cesium.GeoTIFFImageryProvider({
+        url: 'https://raw.githubusercontent.com/assandra81/rob/main/tsunami_risk_semarang_cesium.tif'
+      })
+    );
+
+    // Fokus kamera ke area Semarang
+    viewer.camera.flyTo({
+      destination: Cesium.Cartesian3.fromDegrees(110.45, -6.95, 200000.0)
+    });
+
+    // Kontrol transparansi dengan slider
+    const slider = document.getElementById('slider');
+    slider.addEventListener('input', function() {
+      riskLayer.alpha = parseFloat(slider.value);
+    });
   </script>
 </body>
 </html>
