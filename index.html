@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <title>Tsunami Risk Semarang 3D</title>
   <!-- Load CesiumJS -->
-  Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMmI3Y2IyOC1mOGNlLTRiNDAtODAwMC1hZTRjMzhmZDkzYjUiLCJpZCI6NDI0MTgwLCJpYXQiOjE3NzcyODM5MzZ9.5hcQx2RjNgnk_KIY9JleSMNoyRe1H9BaPVU8FDQlnSs';
   <script src="https://cesium.com/downloads/cesiumjs/releases/1.113/Build/Cesium/Cesium.js"></script>
   <link href="https://cesium.com/downloads/cesiumjs/releases/1.113/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
   <style>
@@ -23,12 +22,13 @@
   <input id="slider" type="range" min="0" max="1" step="0.05" value="1">
 
   <script>
-    // Buat viewer dengan terrain dari Cesium Ion (gunakan Asset ID)
+    // Masukkan token Cesium Ion di sini
+    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMmI3Y2IyOC1mOGNlLTRiNDAtODAwMC1hZTRjMzhmZDkzYjUiLCJpZCI6NDI0MTgwLCJpYXQiOjE3NzcyODM5MzZ9.5hcQx2RjNgnk_KIY9JleSMNoyRe1H9BaPVU8FDQlnSs';
+
+    // Buat viewer dengan terrain dari Cesium Ion
     const viewer = new Cesium.Viewer('cesiumContainer', {
-      terrainProvider: Cesium.createWorldTerrain({
-        requestVertexNormals: true
-      }),
-      imageryProvider: new Cesium.IonImageryProvider({ assetId: 4671328 }) // Bing Maps
+      terrainProvider: Cesium.createWorldTerrain(),
+      imageryProvider: new Cesium.IonImageryProvider({ assetId: 2 }) // Bing Maps
     });
 
     // Tambahkan GeoTIFF hasil export dari GEE
