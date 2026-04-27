@@ -1,53 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>Tsunami Risk Semarang 3D</title>
-  <!-- Load CesiumJS -->
   <script src="https://cesium.com/downloads/cesiumjs/releases/1.113/Build/Cesium/Cesium.js"></script>
   <link href="https://cesium.com/downloads/cesiumjs/releases/1.113/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
-  <style>
-    html, body, #cesiumContainer {
-      width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
-    }
-    #slider {
-      position: absolute;
-      top: 10px; left: 10px;
-      width: 200px;
-    }
-  </style>
+  <style>html, body, #cesiumContainer {width:100%; height:100%; margin:0;}</style>
 </head>
 <body>
   <div id="cesiumContainer"></div>
-  <input id="slider" type="range" min="0" max="1" step="0.05" value="1">
-
   <script>
-    // Masukkan token Cesium Ion di sini
-    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2Y2IyNjQ1ZS01MmYwLTRkN2YtOWFjNi00NDA5NzZjZjEwNmUiLCJpZCI6NDI0MTgwLCJpYXQiOjE3NzcyOTUzMDZ9.TUuihKXK3FWR0odr8-qowwJppn896PLTayP_jmKqtxo';
-
-    // Buat viewer dengan terrain dari Cesium Ion
-    const viewer = new Cesium.Viewer('cesiumContainer', {
-  terrainProvider: new Cesium.EllipsoidTerrainProvider()
-});
-
-
-    // Tambahkan GeoTIFF hasil export dari GEE
-    const riskLayer = viewer.imageryLayers.addImageryProvider(
-      new Cesium.GeoTIFFImageryProvider({
-        url: 'https://raw.githubusercontent.com/assandra81/rob/main/tsunami_risk_semarang_cesium.tif'
-      })
-    );
-
-    // Fokus kamera ke area Semarang
-    viewer.camera.flyTo({
-      destination: Cesium.Cartesian3.fromDegrees(110.45, -6.95, 200000.0)
-    });
-
-    // Kontrol transparansi dengan slider
-    const slider = document.getElementById('slider');
-    slider.addEventListener('input', function() {
-      riskLayer.alpha = parseFloat(slider.value);
-    });
+    const viewer = new Cesium.Viewer('cesiumContainer');
   </script>
 </body>
 </html>
