@@ -27,9 +27,9 @@
 
     // Buat viewer dengan terrain dari Cesium Ion
     const viewer = new Cesium.Viewer('cesiumContainer', {
-      terrainProvider: Cesium.createWorldTerrain(),
-      imageryProvider: new Cesium.IonImageryProvider({ assetId: 2 }) // Bing Maps
-    });
+  terrainProvider: new Cesium.EllipsoidTerrainProvider()
+});
+
 
     // Tambahkan GeoTIFF hasil export dari GEE
     const riskLayer = viewer.imageryLayers.addImageryProvider(
