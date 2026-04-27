@@ -15,10 +15,8 @@
   <div id="cesiumContainer"></div>
   <script>
     // Buat viewer dengan terrain global
-    const viewer = new Cesium.Viewer('cesiumContainer', {
-      terrainProvider: Cesium.createWorldTerrain(),
-      imageryProvider: new Cesium.IonImageryProvider({ assetId: 2 }) // Bing Maps
-    });
+    const viewer = new Cesium.Viewer('cesiumContainer');
+
 
     // Tambahkan GeoTIFF hasil export dari GEE
     const imageryLayer = viewer.imageryLayers.addImageryProvider(
