@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tsunami Risk Semarang 3D</title>
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.113/Build/Cesium/Cesium.js"></script>
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.113/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+  <style>
+    html, body, #cesiumContainer {
+      width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div id="cesiumContainer"></div>
+  <script>
+    // Buat viewer dengan terrain global
+    const viewer = new Cesium.Viewer('cesiumContainer', {
+      terrainProvider: Cesium.createWorldTerrain(),
+      imageryProvider: new Cesium.IonImageryProvider({ assetId: 2 }) // Bing Maps
+    });
+
+    // Tambahkan GeoTIFF hasil export dari GEE
+    const imageryLayer = viewer.imageryLayers.addImageryProvider(
+      new Cesium.GeoTIFFImageryProvider({
+        url: 'https://raw.githubusercontent.com/USERNAME/tsunami-risk-cesium/main/tsunami_risk_semarang_cesium.tif'
+      })
+    );
+
+    // Fokus ke area Semarang
+    viewer.camera.flyTo({
+      destination: Cesium.Cartesian3.fromDegrees(110.45, -6.95, 200000.0)
+    });
+  </script>
+</body>
+</html>
