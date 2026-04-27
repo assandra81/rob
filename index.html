@@ -18,9 +18,8 @@
     Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMmI3Y2IyOC1mOGNlLTRiNDAtODAwMC1hZTRjMzhmZDkzYjUiLCJpZCI6NDI0MTgwLCJpYXQiOjE3NzcyODM5MzZ9.5hcQx2RjNgnk_KIY9JleSMNoyRe1H9BaPVU8FDQlnSs';
 
 const viewer = new Cesium.Viewer('cesiumContainer', {
-  terrainProvider: Cesium.createWorldTerrain()
+  terrainProvider: new Cesium.EllipsoidTerrainProvider()
 });
-
 
     // Tambahkan GeoTIFF hasil export dari GEE
     const imageryLayer = viewer.imageryLayers.addImageryProvider(
